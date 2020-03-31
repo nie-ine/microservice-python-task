@@ -7,4 +7,4 @@ COPY . /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade lxml
 
-CMD [ "python", "template.py" ]
+CMD [ "python", "json-task.py" ]
