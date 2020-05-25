@@ -4,7 +4,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app/
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --upgrade lxml
+RUN pip3 install setuptools
+RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --upgrade lxml
 
-CMD [ "python", "json-task.py" ]
+CMD [ "python3", "json-task.py" ]
