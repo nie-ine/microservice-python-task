@@ -6,12 +6,14 @@ import requests, json
 from random import random
 from flask_cors import CORS
 from flask import Flask, request, render_template
+from flask import jsonify
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route("/json-task", methods=["POST","GET"])
 def jsontask():
+    # print("here", request.data)
     # POST
     if request.method == "POST":
         if not os.path.exists("temp_files"):
@@ -41,6 +43,7 @@ def jsontask():
                 c_name=c_name,
                 code=code)
 
+
         # Enter temp_files directory and execute code file
         os.chdir("temp_files")
         
@@ -55,12 +58,15 @@ def jsontask():
             # Leave temp_files directory
             os.chdir("..")
             # Return error message
-            return render_template("json-task.html",
-                output=e.output,
-                d_name=d_name,
-                data=data,
-                c_name=c_name,
-                code=code)
+            # return render_template("json-task.html",
+            #     output=e.output,
+            #     d_name=d_name,
+            #     data=data,
+            #     c_name=c_name,
+            #     code=code)
+            return jsonify(
+                output=e.output
+            )
         else:
             # If run successfully, delete the temporarily saved files
             files = glob.glob("*")
@@ -69,12 +75,15 @@ def jsontask():
             # Leave temp_files directory
             os.chdir("..")
             # Return output
-            return render_template("json-task.html", 
-                output=process,
-                d_name=d_name,
-                data=data,
-                c_name=c_name,
-                code=code)
+            # return render_template("json-task.html",
+            #     output=process,
+            #     d_name=d_name,
+            #     data=data,
+            #     c_name=c_name,
+            #     code=code)
+            return jsonify(
+                output=process
+            )
     # GET
     else:
         return render_template("json-task.html")
