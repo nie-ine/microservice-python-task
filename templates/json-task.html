@@ -7,7 +7,12 @@
 <title>Code</title>
 </head>
 <body>
-<form action="http://localhost:8080/json-task" method="POST">
+{% if endpoint == "task" %}
+{% set route = 'json-task' %}
+{% else %}
+{% set route = 'json-gui' %}
+{% endif %}
+<form action="http://localhost:8080/{{ route }}" method="POST">
 <div>
 {% if d_name %}
 <input id="d_name" name="d_name" type="text" value="{{ d_name }}">
