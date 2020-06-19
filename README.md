@@ -4,10 +4,11 @@ This microservice renders a view to let a user work with JSON data in Python 3 a
 
 The service has two routes: 
 
-1. /json-task:
-   - The route /json-task is meant for pipelining requests and returns json to be consumed by the next inseri app.
-1. /json-gui:
-   - The route /json-gui returns the output of the Python code inside the HTML view. 
+## /json-task
+The route /json-task is meant for pipelining requests and returns json to be consumed by the next inseri app.
+
+## /json-gui
+The route /json-gui returns the output of the Python code inside the HTML view. 
 
 ## Run and Develop Locally
 
@@ -24,7 +25,7 @@ The service has two routes:
 
 1. Build the image: ``[sudo] docker build -t nieine/json-task .``
 1. Run the container: ``[sudo] docker run -p 8080:8080 nieine/json-task``
-1. Go to http://localhost:8080/json-task
+1. Go to http://localhost:8080/json-task or http://localhost:8080/json-gui
 
 ## Publish on Dockerhub
 See [microservice-template](https://github.com/nie-ine/microservice-template)
