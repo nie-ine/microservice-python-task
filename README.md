@@ -4,10 +4,10 @@ This microservice renders a view to let a user work with JSON data in Python 3 a
 
 The service has two routes: 
 
-1. /json-task
-   The route /json-task is meant for pipelining requests and returns json to be consumed by the next inseri app.
-1. /json-gui
-   The route /json-gui returns the output of the Python code inside the HTML view. 
+1. /json-task:
+   - The route /json-task is meant for pipelining requests and returns json to be consumed by the next inseri app.
+1. /json-gui:
+   - The route /json-gui returns the output of the Python code inside the HTML view. 
 
 ## Run and Develop Locally
 
