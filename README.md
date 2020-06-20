@@ -27,7 +27,7 @@ The route /json-gui returns the output of the Python code inside the HTML view.
 1. Run the container: ``[sudo] docker run -p 8080:8080 nieine/json-task``
 1. Go to http://localhost:8080/json-task or http://localhost:8080/json-gui
 
-## Call the service in a RESTful Way
+## Call the Service in a RESTful Way
 
 If the service is running, you can POST a body with form data to one of the routes from any application. 
 
