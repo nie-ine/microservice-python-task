@@ -23,8 +23,8 @@ The route /json-gui returns the output of the Python code inside the HTML view.
 
 ## Run with Docker
 
-1. Build the image: ``[sudo] docker build -t nieine/json-task .``
-1. Run the container: ``[sudo] docker run -p 8080:8080 nieine/json-task``
+1. Build the image: ``[sudo] docker build -t nieine/microservice-json-task .``
+1. Run the container: ``[sudo] docker run -p 8080:8080 nieine/microservice-json-task``
 1. Go to http://localhost:8080/json-task or http://localhost:8080/json-gui
 
 ## Call the Service in a RESTful Way
@@ -47,4 +47,6 @@ data:{↵    "message": "Hello World!"↵}
 code:import json↵↵def show_message(json_file):↵    with open(json_file, 'r') as f:↵        content = json.load(f)↵↵    return content['message']↵↵if __name__ == "__main__":↵    print(show_message("yourData.json"))
 ```
 ## Publish on Dockerhub
-See [microservice-template](https://github.com/nie-ine/microservice-template)
+
+1. Build the image: ``[sudo] docker build -t nieine/microservice-json-task:YYYY-MM-DD .``
+1. Push the image: ``[sudo] docker push nieine/microservice-json-task:YYYY-MM-DD``
