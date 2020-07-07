@@ -12,14 +12,12 @@ The route /json-gui returns the output of the Python code inside the HTML view.
 
 ## Run and Develop Locally
 
-### Dependencies
-1. python3
-2. packages: see requirements.txt
-
 ### Install and Run
+1. Create a virtual environment
+1. Activate your created virtual environment
 1. ``pip3 install -r requirements.txt``
 1. Run with ``python3 json-task.py``
-1. Go to http://localhost:8080/json-task
+1. Go to http://localhost:8080/json-task or http://localhost:8080/json-gui
 
 ## Run with Docker
 
