@@ -100,7 +100,7 @@ def jsontask():
                     code=code)
             else:
                 return jsonify(
-                    output=process,
+                    output=process.rstrip(),
                 )
     # GET
     else:
