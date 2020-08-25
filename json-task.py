@@ -1,5 +1,6 @@
 import os
 import glob
+import shutil
 import socket
 import subprocess
 import requests, json
@@ -16,17 +17,19 @@ CORS(app)
 def jsontask():
     # POST
     if request.method == "POST":
-        if not os.path.exists("temp_files"):
-            os.makedirs("temp_files")
+        # if not os.path.exists("temp_files"):
+        #     os.makedirs("temp_files")
 
-        # Going to add a random number for filenames - avoiding any conflicts
-        # temp_id = random.randint(1000000,2000000)
+        # Going to add a random number for the temp_folder - avoiding any conflicts
+        temp_folder = str(random.randint(1000000000,9000000000))
+
+        os.makedirs(temp_folder)
 
         # Get data and temporarily save as file
         d_name = request.form["d_name"]
         data = request.form["data"]
         if not d_name == "":
-            df = open("temp_files/{}".format(d_name), "w+")
+            df = open("{}/{}".format(temp_folder, d_name), "w+")
             df.write(data)
             df.close()
 
@@ -34,7 +37,7 @@ def jsontask():
         c_name = request.form["c_name"]
         code = request.form["code"]
         if c_name.endswith(".py") and len(c_name) > 3:
-            cf = open("temp_files/{}".format(c_name), "w+")
+            cf = open("{}/{}".format(temp_folder, c_name), "w+")
             cf.write(code)
             cf.close()
         else:
@@ -46,7 +49,7 @@ def jsontask():
                 code=code)
 
         # Enter temp_files directory and execute code file
-        os.chdir("temp_files")
+        os.chdir(temp_folder)
         
         # Try to run the code with subprocess (python3)
         try:
@@ -56,8 +59,12 @@ def jsontask():
                 universal_newlines=True)
         # Check for error message
         except subprocess.CalledProcessError as e:
-            # Leave temp_files directory
+            # Leave temp_folder
             os.chdir("..")
+
+            # Remove temp_folder
+            shutil.rmtree(temp_folder)
+            
             if request.endpoint == "gui": 
                 # Return error message
                 return render_template("json-task.html",
@@ -71,12 +78,18 @@ def jsontask():
                     output=e.output
                 )
         else:
-            # If run successfully, delete the temporarily saved files
-            files = glob.glob("*")
-            for f in files:
-                os.remove(f)
-            # Leave temp_files directory
+            # If run successfully
+
+            # files = glob.glob("*")
+            # for f in files:
+            #     os.remove(f)
+
+            # Leave temp_folder
             os.chdir("..")
+
+            # Remove temp_folder
+            shutil.rmtree(temp_folder)
+
             if request.endpoint == "gui":
                 # Return output
                 return render_template("json-task.html",
@@ -87,7 +100,7 @@ def jsontask():
                     code=code)
             else:
                 return jsonify(
-                    output=process
+                    output=process,
                 )
     # GET
     else:
