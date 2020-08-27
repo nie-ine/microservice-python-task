@@ -14,7 +14,11 @@ CORS(app)
 
 @app.route("/json-task", endpoint="task", methods=["POST","GET"])
 @app.route("/json-gui", endpoint="gui", methods=["POST","GET"])
+
+
 def jsontask():
+    # Current working directory
+    cwd = os.getcwd()
     # POST
     if request.method == "POST":
         # if not os.path.exists("temp_files"):
@@ -60,7 +64,7 @@ def jsontask():
         # Check for error message
         except subprocess.CalledProcessError as e:
             # Leave temp_folder
-            os.chdir("..")
+            os.chdir(cwd)
 
             # Remove temp_folder
             shutil.rmtree(temp_folder)
@@ -80,12 +84,8 @@ def jsontask():
         else:
             # If run successfully
 
-            # files = glob.glob("*")
-            # for f in files:
-            #     os.remove(f)
-
             # Leave temp_folder
-            os.chdir("..")
+            os.chdir(cwd)
 
             # Remove temp_folder
             shutil.rmtree(temp_folder)
@@ -104,7 +104,7 @@ def jsontask():
                 )
     # GET
     else:
-        #return "{}".format(request.endpoint)
+        os.chdir(cwd)
         return render_template("json-task.html", endpoint=request.endpoint)
 
 if __name__ == "__main__":
