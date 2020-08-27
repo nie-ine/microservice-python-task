@@ -21,11 +21,10 @@ def jsontask():
     cwd = os.getcwd()
     # POST
     if request.method == "POST":
-        # if not os.path.exists("temp_files"):
-        #     os.makedirs("temp_files")
+        os.chdir(cwd)
 
-        # Going to add a random number for the temp_folder - avoiding any conflicts
-        temp_folder = str(random.randint(1000000000,9000000000))
+        # Going to add a randomly named the temp_folder - avoiding any naming conflicts
+        temp_folder = str(random.randint(1000000000,9999999999))
 
         os.makedirs(temp_folder)
 
