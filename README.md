@@ -41,7 +41,7 @@ E.g:
 ```
 {
   "datafile":"yourData.json",
-  "data":"{\n    \"message\": \"Hel777888lo World!\"\n}\n",
+  "data":"{\n    \"message\": \"Hello World!\"\n}\n",
   "codefile":"yourCode.py",
   "code":"# Your python 3 code goes here\nimport json\n\ndef show_message(json_file):\n    with open(json_file, 'r') as f:\n        content = json.load(f)\n\n    return content['message']\n\nif __name__ == \"__main__\":\n    print(show_message(\"yourData.json\"))\n"
 }
