@@ -7,31 +7,26 @@
 <title>Code</title>
 </head>
 <body>
-{% if endpoint == "task" %}
-{% set route = 'json-task' %}
-{% else %}
-{% set route = 'json-gui' %}
-{% endif %}
-<form action="http://localhost:8080/{{ route }}" method="POST">
+<form id="task_form">
 <div>
-{% if d_name %}
-<input id="d_name" name="d_name" type="text" value="{{ d_name }}">
+{% if datafile %}
+<input id="datafile" name="datafile" type="text" value="{{ datafile }}">
 {% else %}
-<input id="d_name" name="d_name" type="text" value="yourData.json">
+<input id="datafile" name="datafile" type="text" value="yourData.json">
 {% endif %}
-{% if c_name %}
-<input id="c_name" name="c_name" type="text" value="{{ c_name }}">
+{% if codefile %}
+<input id="codefile" name="codefile" type="text" value="{{ codefile }}">
 {% else %}
-<input id="c_name" name="c_name" type="text" value="yourCode.py">
+<input id="codefile" name="codefile" type="text" value="yourCode.py">
 {% endif %}
 </div>
 <!-- Data editor and according textarea -->
 <div>
 <textarea name="data" id="data"></textarea>
 {% if data %}
-<div id="d_editor">{{ data }}</div>
+<div id="dataeditor">{{ data }}</div>
 {% else %}
-<div id="d_editor">{
+<div id="dataeditor">{
     "message": "Hello World!"
 }
 </div>
@@ -41,9 +36,9 @@
 <div>
 <textarea name="code" id="code"></textarea>
 {% if code %}
-<div id="c_editor">{{ code }}</div>
+<div id="codeeditor">{{ code }}</div>
 {% else %}
-<div id="c_editor"># Your python 3 code goes here
+<div id="codeeditor"># Your python 3 code goes here
 import json
 
 def show_message(json_file):
@@ -57,7 +52,7 @@ if __name__ == "__main__":
 </div>
 {% endif %}
 </div>
-<input id="submit" type="submit" value="Submit" />
+<input id="submit" value="Submit" />
 </form>
 <div id="console">
 <pre id="output">
@@ -65,26 +60,52 @@ if __name__ == "__main__":
 </pre>
 </div>
 <script>
+
     // Data editor handling
     var d_textarea = $('#data').hide();
 
-    var d_editor = ace.edit("d_editor");
-    d_editor.setTheme("ace/theme/monokai");
-    d_editor.session.setMode("ace/mode/json");
-    d_editor.setFontSize(16);
+    var dataeditor = ace.edit("dataeditor");
+    dataeditor.setTheme("ace/theme/monokai");
+    dataeditor.session.setMode("ace/mode/json");
+    dataeditor.setFontSize(16);
 
     // Code editor handling
     var c_textarea = $('#code').hide();
 
-    var c_editor = ace.edit("c_editor");
-    c_editor.setTheme("ace/theme/monokai");
-    c_editor.session.setMode("ace/mode/python");
-    c_editor.setFontSize(16);
+    var codeeditor = ace.edit("codeeditor");
+    codeeditor.setTheme("ace/theme/monokai");
+    codeeditor.session.setMode("ace/mode/python");
+    codeeditor.setFontSize(16);
 
     // Submit button
-    $('#submit').click(function(){
-        d_textarea.val(d_editor.getSession().getValue());
-        c_textarea.val(c_editor.getSession().getValue());
+    $(document).ready(function() {
+        $("#submit").on("click", function() {
+
+            d_textarea.val(dataeditor.getSession().getValue());
+            c_textarea.val(codeeditor.getSession().getValue());
+
+            $.ajax({
+                url: "http://localhost:50000",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    datafile: $("#datafile").val(),
+                    data: $("#data").val(),
+                    codefile: $("#codefile").val(),
+                    code: $("#code").val(),
+                }),
+                success: function(response) {
+                    console.log("Success:")
+                    console.log(response)
+                    $("#output").text(response.output);
+                },
+                error: function(error) {
+                    console.log("Error:")
+                    console.log(error);
+                }
+            });
+        });
     });
 </script>
 </body>

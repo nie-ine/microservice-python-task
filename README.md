@@ -17,13 +17,13 @@ The route /json-gui returns the output of the Python code inside the HTML view.
 1. Activate your created virtual environment
 1. ``pip3 install -r requirements.txt``
 1. Run with ``python3 json-task.py``
-1. Go to http://localhost:8080/json-task or http://localhost:8080/json-gui
+1. Go to http://localhost:50000/json-task or http://localhost:50000/json-gui
 
 ## Run with Docker
 
 1. Build the image: ``[sudo] docker build -t nieine/microservice-json-task .``
-1. Run the container: ``[sudo] docker run -p 8080:8080 nieine/microservice-json-task``
-1. Go to http://localhost:8080/json-task or http://localhost:8080/json-gui
+1. Run the container: ``[sudo] docker run -p 50000:50000 nieine/microservice-json-task``
+1. Go to http://localhost:50000/json-task or http://localhost:50000/json-gui
 
 ## Call the Service in a RESTful Way
 
