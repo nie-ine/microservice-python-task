@@ -53,6 +53,8 @@ def jsontask():
             cf.write(code)
             cf.close()
         else:
+            # Remove temp_folder
+            shutil.rmtree(temp_folder)
             return jsonify(
                 output="Please enter a proper code filename ending with '.py'"
             )
