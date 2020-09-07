@@ -1,6 +1,6 @@
 # microservice-json-task
 
-This microservice renders a view to let a user work with JSON data in Python 3 and is part of the microservice pipline in [inseri](https://github.com/nie-ine/inseri). The service provides the possibility to transform a JSON data response received by an API call into the needed data structure in order to pass it to an according inseri app. With a very pragmatic approach, it currently temporarily saves your data and code input as files and runs your script against your data file.
+This microservice is part of the microservice pipline in [inseri](https://github.com/nie-ine/inseri). The service provides the possibility to use/create Python code, use it to transform a response received by an API call into the needed data structure and pass the result to an according inseri app.
 
 ## Run and Develop Locally
 
