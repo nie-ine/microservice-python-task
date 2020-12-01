@@ -24,10 +24,10 @@ If the service is running, you can POST a body with JSON data from any applicati
 Body:
 ```
 {
-  "datafile": "...", 
-  "data": "...", 
-  "codefile": "...", 
-  "code": "..."
+  "datafile": "[The name of the JSON file]",
+  "data": "[The content of the JSON file]",
+  "codefile": "[The name of the Python file]",
+  "code": "[The content of the Python file]"
 }
 ```
 Response:
