@@ -1,5 +1,3 @@
-flask
-requests
-flask_cors
-yattag
-RestrictedPython
+Flask==1.1.2
+Flask-Cors==3.0.9
+yattag==1.14.0

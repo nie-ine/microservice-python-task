@@ -1,42 +1,46 @@
 import os
 import glob
+import json
 import shutil
 import socket
-import subprocess
-import requests, json
 import random
+import subprocess
 from flask_cors import CORS
-from flask import Flask, request, render_template
-from flask import jsonify
+from flask import Flask, request, render_template, jsonify
+
+# This microservice accepts a POSTed JSON with the filenames and 
+# the contents of one JSON file and one Python script.
+# It executes the Python script and returns the jsonified output of it.
+
+# POST:
+# {
+#     "datafile": "[The name of the JSON file]",
+#     "data": "[The content of the JSON file]",
+#     "codefile": "[The name of the Python file]",
+#     "code": "[The content of the Python file]"
+# }
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route("/", methods=["POST","GET"])
-# @app.route("/json-gui", endpoint="gui", methods=["POST","GET"])
 
-def jsontask():
-    # Current working directory
+def pythontask():
+    # The current working directory
     cwd = os.getcwd()
-    # POST
+
+    ### POST ###
     if request.method == "POST":
         os.chdir(cwd)
 
-        # Going to add a randomly named the temp_folder - avoiding any naming conflicts
+        # Create a randomly named temp_folder - avoiding any naming conflicts
         temp_folder = str(random.randint(1000000000,9999999999))
         os.makedirs(temp_folder)
 
         # Take the posted json data
         req = request.get_json()
 
-        # {
-        #     "datafile": "...",
-        #     "data": "...",
-        #     "codefile": "...",
-        #     "code": "..."
-        # }
-
-        # Get data and temporarily save as file
+        # Get and save the JSON file
         datafile = req["datafile"]
         data = req["data"]
         if not datafile == "":
@@ -44,10 +48,9 @@ def jsontask():
             df.write(data)
             df.close()
 
-        # Get code and temporarily save as file
+        # Get and save the Python script
         codefile = req["codefile"]
         code = req["code"]
-        # code = "print('hello wtf')"
         if codefile.endswith(".py") and len(codefile) > 3:
             cf = open("{}/{}".format(temp_folder, codefile), "w+")
             cf.write(code)
@@ -55,9 +58,7 @@ def jsontask():
         else:
             # Remove temp_folder
             shutil.rmtree(temp_folder)
-            return jsonify(
-                output="Please enter a proper code filename ending with '.py'"
-            )
+            return jsonify(output="Please enter a proper code filename ending with '.py'")
 
         # Enter temp_files directory and execute code file
         os.chdir(temp_folder)
@@ -72,31 +73,25 @@ def jsontask():
         except subprocess.CalledProcessError as e:
             # Leave temp_folder
             os.chdir(cwd)
-
             # Remove temp_folder
             shutil.rmtree(temp_folder)
             
-            return jsonify(
-                output=e.output
-            )
+            return jsonify(output=e.output)
 
         else:
             # If run successfully
-
             # Leave temp_folder
             os.chdir(cwd)
-
             # Remove temp_folder
             shutil.rmtree(temp_folder)
+            # Return the output
+            return jsonify(output=process.rstrip())
 
-            return jsonify(
-                output=process.rstrip(),
-            )
-
-    # GET
+    ### GET ###
     else:
         os.chdir(cwd)
-        return render_template("json-task.html")
+        # Render the native interface to communicate with the microservice
+        return render_template("python-task.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=50000, debug=True)
