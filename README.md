@@ -58,3 +58,11 @@ E.g.:
 
 1. Build the image: ``[sudo] docker build -t nieine/microservice-python-task:YYYY-MM-DD .``
 1. Push the image: ``[sudo] docker push nieine/microservice-python-task:YYYY-MM-DD``
+
+## Python Packages
+
+Currently, the following Python packages are installed: 
+
+- yattag==1.14.0
+
+To add more packages, add them to the requirements.txt file.  
