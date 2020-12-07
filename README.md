@@ -61,8 +61,92 @@ E.g.:
 
 ## Python Packages
 
-Currently, the following Python packages are installed: 
+Currently, the below-listed Python packages are installed. To add more packages, add them to the requirements.txt file and re-build the Docker image. 
 
+- apturl==0.5.2
+- arrow==0.17.0
+- asn1crypto==0.24.0
+- beautifulsoup4==4.9.3
+- Brlapi==0.6.6
+- certifi==2020.12.5
+- chardet==3.0.4
+- click==7.1.2
+- command-not-found==0.3
+- cryptography==2.1.4
+- cupshelpers==1.0
+- cycler==0.10.0
+- decorator==4.4.2
+- defer==1.0.6
+- flashtext==2.7
+- Flask==1.1.2
+- Flask-Cors==3.0.9
+- graphviz==0.14
+- html5lib==0.999999999
+- httplib2==0.9.2
+- idna==2.10
+- isodate==0.6.0
+- itsdangerous==1.1.0
+- Jinja2==2.11.2
+- joblib==0.17.0
+- kazam==1.4.5
+- keyring==10.6.0
+- keyrings.alt==3.0
+- kiwisolver==1.3.1
+- language-selector==0.1
+- launchpadlib==1.10.6
+- lazr.restfulclient==0.13.5
+- lazr.uri==1.0.3
+- louis==3.5.0
+- lxml==4.2.1
+- macaroonbakery==1.1.3
+- Mako==1.0.7
+- MarkupSafe==1.1.1
+- matplotlib==3.3.3
+- netifaces==0.10.4
+- nltk==3.5
+- numpy==1.19.4
+- oauth==1.0.1
+- olefile==0.45.1
+- pexpect==4.2.1
+- Pillow==8.0.1
+- protobuf==3.0.0
+- pycairo==1.16.2
+- pycrypto==2.6.1
+- pycups==1.9.73
+- pygobject==3.26.1
+- pymacaroons==0.13.0
+- PyNaCl==1.1.2
+- pyparsing==2.4.7
+- pyRFC3339==1.0
+- python-apt==1.6.5+ubuntu0.3
+- python-dateutil==2.8.1
+- python-debian==0.1.32
+- pytz==2018.3
+- pyxdg==0.25
+- PyYAML==3.12
+- rdflib==5.0.0
+- rdflib-jsonld==0.5.0
+- regex==2020.11.13
+- reportlab==3.4.0
+- requests==2.25.0
+- requests-unixsocket==0.1.5
+- RestrictedPython==5.0
+- SecretStorage==2.3.1
+- simplejson==3.13.2
+- six==1.15.0
+- soupsieve==2.0.1
+- system-service==0.3
+- systemd-python==234
+- textblob==0.15.3
+- tqdm==4.54.1
+- ufw==0.36
+- unattended-upgrades==0.1
+- urllib3==1.26.2
+- usb-creator==0.3.3
+- validators==0.18.1
+- wadllib==1.3.2
+- webencodings==0.5
+- Werkzeug==1.0.1
+- xkit==0.0.0
 - yattag==1.14.0
-
-To add more packages, add them to the requirements.txt file.  
+- zope.interface==4.3.2

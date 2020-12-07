@@ -1,3 +1,10 @@
 Flask==1.1.2
 Flask-Cors==3.0.9
 yattag==1.14.0
+matplotlib
+numpy
+requests
+arrow
+flashtext
+beautifulsoup4
+textblob
