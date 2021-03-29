@@ -60,8 +60,15 @@ def pythontask():
             shutil.rmtree(temp_folder)
             return jsonify(output="Please enter a proper code filename ending with '.py'")
 
+        src = os.getcwd() + '/thirdPartyPackages'
+
         # Enter temp_files directory and execute code file
         os.chdir(temp_folder)
+
+        # Create symlink to third party packages
+
+        dst = os.getcwd() + '/thirdPartyPackages'
+        os.symlink(src, dst)
         
         # Try to run the code with subprocess (python3)
         try:
